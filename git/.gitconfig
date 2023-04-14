@@ -1,0 +1,13 @@
+[user]
+	email = liming7@asiainfo.com
+	name = liming7
+[commit]
+	template = C:\\Users\\kdlim\\Documents\\.gitmessage.txt
+[http]
+	sslverify = true
+	sslBackend = openssl
+	sslCAInfo = C:\\tools\\msys64\\usr\\ssl\\cert.pem
+[remote "origin"]
+#	proxy = 127.0.0.1:36251
+[alias]
+  lo = log --color --pretty=format:' %C(white bold dim) %C(cyan bold dim)[%h] %Creset %Cgreen%cn %C(white bold dim)| %C(yellow dim)%cr %n%Creset  %C(white dim italic)%s%n%n%Creset'
