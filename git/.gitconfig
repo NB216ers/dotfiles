@@ -1,8 +1,8 @@
 [user]
-	email = liming7@asiainfo.com
-	name = liming7
+	email = kdliming@outlook.com
+	name = liming
 [commit]
-	template = C:\\Users\\kdlim\\Documents\\.gitmessage.txt
+	template = /c/Users/kdlim/Documents/.gitmessage.txt
 [http]
 	sslverify = true
 	sslBackend = openssl
@@ -11,3 +11,15 @@
 #	proxy = 127.0.0.1:36251
 [alias]
   lo = log --color --pretty=format:' %C(white bold dim) %C(cyan bold dim)[%h] %Creset %Cgreen%cn %C(white bold dim)| %C(yellow dim)%cr %n%Creset  %C(white dim italic)%s%n%n%Creset'
+[core]
+	editor = nvim
+	autocrlf = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[credential]
+	helper = cache
+[credential "http://10.5.1.28:8070"]
+	provider = generic

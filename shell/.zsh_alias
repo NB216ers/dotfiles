@@ -1,0 +1,33 @@
+ alias less='less -r'                          # raw control characters
+ alias whence='type -a'                        # where, of a sort
+ alias grep='grep --color'                     # show differences in colour
+ alias egrep='egrep --color=auto'              # show differences in colour
+ alias fgrep='fgrep --color=auto'              # show differences in colour
+#
+# Some shortcuts for different directory listings
+ alias ls='ls -hF --color=tty'                 # classify files in colour
+ alias dir='ls --color=auto --format=vertical'
+ alias vdir='ls --color=auto --format=long'
+ alias ll='ls -l'                              # long list
+ alias la='ls -A'                              # all but . and ..
+ alias l='ls -CF'                              #
+
+alias vi=nvim
+alias vim=nvim
+alias tns='tmux new -s'
+alias tks='tmux kill-session -t'
+alias tat='tmux attach -t'
+alias tls='tmux ls'
+alias scp=~/.ssh/scp.sh
+alias ssh=~/.ssh/ssh.sh
+
+alias ch='cd ~'
+
+alias aria2c='C:\\Users\\kdlim\\develop\\aria2-1.37.0-win-64bit-build1\\aria2c'
+
+alias setproxy="export ALL_PROXY=socks5://127.0.0.1:1088"
+alias unsetproxy="unset ALL_PROXY"
+
+#alias nvim="/c/Users/kdlim/scoop/apps/neovim/0.8.3/bin/nvim.exe"
+#alias nvim="/c/Users/kdlim/scoop/apps/neovim/0.10.0/bin/nvim.exe"
+alias nvim="/c/Users/kdlim/scoop/apps/neovim/0.9.0/bin/nvim.exe"

@@ -1,0 +1,26 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- create:
+  - ~/.proxychains
+
+- link:
+  # shell stuff
+    ~/.alias: shell/.zsh_alias
+    ~/.zsh_alias: shell/.zsh_alias
+    ~/.bashrc: shell/.bashrc
+    ~/.zshrc:  shell/.zshrc
+  # Git
+    ~/.gitconfig: git/.gitconfig
+      #~/.gitignore: git/.gitignore
+  # Apps
+    ~/_ideavimrc: idea/.ideavimrc
+    ~/.tmux.conf: tmux/.tmux.conf 
+    ~/.tmux.conf.local: tmux/.tmux.conf.local
+  # proxychains
+    ~/.proxychains/proxychains.conf: proxychains/proxychains.conf
+- shell:
+    - [git submodule update --init --recursive, Installing submodules]

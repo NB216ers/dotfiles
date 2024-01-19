@@ -1,0 +1,157 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# created by HuangYeWuDeng
+
+#autoload -Uz compinit
+#compinit
+
+# prompt config
+#export AGKOZAK_PROMPT_DIRTRIM=10
+#export AGKOZAK_MULTILINE=0
+
+# Load antibody
+# export ANTIBODY_HOME=/c/Users/hacklog/.antibody
+#source <(antibody init)
+#antibody bundle < ~/.zsh_plugins.txt
+########################## 🔽 AUTO COMP 🔽 ###########################
+# Basic auto/tab complete:
+autoload bashcompinit && bashcompinit
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+# put the custom completions here: /usr/local/share/zsh/site-functions
+# Addtional completions can be found in: https://github.com/zsh-users/zsh-completions
+_comp_options+=(globdots)		# Include hidden files.
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+
+########################## 🔽 AUTO COMP 🔽 ###########################
+
+[ -e ~/.zsh_alias ] && source ~/.zsh_alias
+[ -e ~/.zsh_compatible ] && source ~/.zsh_compatible
+
+
+alias so='source ~/.zsh_alias'
+
+autoload -U colors && colors
+
+# vi mode  在 msys2 安装的 zsh 
+# 中输入命令很慢可能是因为 zsh 使用了默认的 shell 模式，这种模式在输入每个字符后都会重新计算一次提示符（prompt）
+bindkey -v
+export KEYTIMEOUT=1
+
+#eval "$(starship init zsh)"
+
+# https://github.com/alacritty/alacritty/issues/1687
+tmux () {
+    TMUX="command tmux ${@}"
+#    SHELL=/usr/bin/bash script -qO /dev/null -c "eval $TMUX";
+    SHELL=C:\\tools\\msys64\\usr\\bin\\zsh.exe script -qO /dev/null -c "eval $TMUX";
+}
+# Go
+export GOROOT=/mingw64/lib/go
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+########################### JUMP ###########################
+eval "$(jump shell)"
+
+__jump_chpwd() {
+  jump chdir
+}
+
+jump_completion() {
+  reply="'$(jump hint "$@")'"
+}
+
+j() {
+  local dir="$(jump cd $@)"
+  test -d "$dir" && cd "$dir"
+}
+
+#typeset -gaU chpwd_functions
+#chpwd_functions+=__jump_chpwd
+
+#compctl -U -K jump_completion j
+########################## 🔼 JUMP 🔼 ##########################
+
+
+########################## 🔽 SHORTCUTS 🔽 ###########################
+lfcd () {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+    fi
+}
+
+########################## 🔼 SHORTCUTS 🔼 ##########################
+
+########################## 🔼 FZF 🔼 ##########################
+
+# Use ~~ as the trigger sequence instead of the default **
+export FZF_COMPLETION_TRIGGER='~~'
+
+# Options to fzf command
+export FZF_COMPLETION_OPTS='--border --info=inline'
+
+# Use fd (https://github.com/sharkdp/fd) instead of the default find
+# command for listing path candidates.
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
+
+# Advanced customization of fzf options via _fzf_comprun function
+# - The first argument to the function is the name of the command.
+# - You should make sure to pass the rest of the arguments to fzf.
+_fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    cd)           fzf --preview 'tree -C {} | head -200'   "$@" ;;
+    export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
+    ssh)          fzf --preview 'dig {}'                   "$@" ;;
+    *)            fzf --preview 'bat -n --color=always {}' "$@" ;;
+  esac
+}
+########################## 🔼 FZF 🔼 ##########################
+#
+########################## 🔽 OH MY ZSH 🔽 ###########################
+export ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh" 
+# source ~/powerlevel10k/powerlevel10k.zsh-theme
+ZSH_THEME="powerlevel10k/powerlevel10k"
+plugins=(
+  git
+  fzf-tab
+  zsh-autosuggestions
+)
+source $ZSH/oh-my-zsh.sh
+########################## 🔼 OH MY ZSH 🔼 ##########################
+POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+bindkey -s '^m' 'lfcd\n'

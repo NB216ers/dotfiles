@@ -1,0 +1,127 @@
+" see more https://blog.einverne.info/post/2020/12/my-idea-vimrc-config.html
+" enable plugin
+set easymotion
+"
+set surround
+" alt + n  选择; alt + p 取消 ; alt + x 跳过
+set multiple-cursors
+set NERDTree
+set nu
+" 相对行号
+set rnu
+set clipboard+=unnamed
+
+" Use comma as leader key, there are other modifier keys in this config,
+" like space, \, t(in normal mode for toggle something),
+" g(in normal mode for goto somewhere)
+let mapleader = ","
+let g:mapleader = ","
+
+" https://github.com/JetBrains/ideavim/blob/master/doc/set-commands.md
+set scrolloff=2
+" 当前模式
+set showmode
+set history=10000
+
+"-- ---------- 插入模式 ---------- --
+imap jk <ESC>
+
+"-- ---------- 视觉模式 ---------- --
+"-- 单行或多行移动
+vmap J :m '>+1<CR>gv=gv
+vmap K :m '<-2<CR>gv=gv
+
+" 设置文内智能搜索提示
+"  高亮search命中的文本
+se t hlsearch
+"  打开增量搜索模式,随着键入即时搜索
+set incsearch
+" 搜索时忽略大小写
+set ignorecase
+" 有一个或以上大写字母时仍大小写敏感
+set smartcase
+" 默认新窗口右和下
+set splitright
+set splitbelow
+
+
+" 去掉搜索高亮
+nnoremap <leader>/ :nohls<CR>
+" clear the highlighted search result
+nnoremap <Leader>sc :nohlsearch<CR>
+
+" 选择工作区 Switcher
+noremap <Leader>s :<C-u>action Switcher<CR>
+
+" paste multiple times. Thanks @mutoa
+vmap p \"_dP
+
+" map r to reload ideavimrc in normal mode
+noremap <space>r <ESC>:source ~/.ideavimrc<cr>
+" general
+nnoremap <Leader>f :<C-u>action ReformatCode<CR>
+nnoremap <Leader>r :<C-u>action RenameElement<CR>
+nnoremap <Leader>o :<C-u>action RecentProjectListGroup<CR>
+nnoremap <Leader>d :<C-u>action ChooseDebugConfiguration<CR>
+nnoremap <Leader>w :<C-u>action CloseAllEditorsButActive<CR>
+
+" window
+nmap <Leader>t :NERDTreeFind<CR>
+nmap <leader>z <action>(UnsplitAll) \| <action>(HideAllWindows)
+
+" screen management
+" Vertical split screen
+nnoremap <Leader>\ <C-w>v
+nnoremap <Leader>- <C-w>s
+nnoremap <leader>h <C-w>h
+nnoremap <leader>l <C-w>l
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+
+" go to somewhere (g in normal mode for goto somewhere)
+nnoremap ga :<C-u>action GotoAction<CR>
+nnoremap gc :<C-u>action GotoClass<CR>
+nnoremap gd :<C-u>action GotoDeclaration<CR>
+nnoremap gs :<C-u>action GotoSuperMethod<CR>
+nnoremap gi :<C-u>action GotoImplementation<CR>
+nnoremap gf :<C-u>action GotoFile<CR>
+nnoremap gm :<C-u>action GotoSymbol<CR>
+nnoremap gl :<C-u>action JumpToLastChange<CR>
+nnoremap gu :<C-u>action ShowUsages<CR>
+"nnoremap gt :<C-u>action GotoTest<CR>
+nnoremap gp :<C-u>action FindInPath<CR>
+vnoremap gp :<C-u>action FindInPath<CR>
+nnoremap gr :<C-u>action RecentFiles<CR>
+" cmd + [ and cmd + ]
+" nnoremap gh :<C-u>action Back<CR>
+" nnoremap gl :<C-u>action Forward<CR>
+" nmap gh <action>(Forward)
+" nmap gb <action>(Back)
+" ctrl + i  或者 ctrl + o
+nnoremap <leader>[ :<C-u>action Back<CR>
+nnoremap <leader>] :<C-u>action Forward<CR>
+
+
+nnoremap <space>fs :<C-u>action FileStructurePopup<CR>
+" code editing
+" nnoremap == :<C-u>action ReformatCode<CR>
+vnoremap == :<C-u>action ReformatCode<CR>
+" nnoremap \i :<C-u>action OptimizeImports<CR>
+" vnoremap \i :<C-u>action OptimizeImports<CR>
+nnoremap \r :<C-u>action RenameElement<CR>
+" nnoremap q :<C-u>action ShowIntentionActions<CR>
+nnoremap cc :<C-u>action CommentByLineComment<CR>
+vnoremap cc :<C-u>action CommentByLineComment<CR>
+
+""""""""""""""""""""""""""""""""""""""Debug""""""""""""""""""""""""""""""""
+nnoremap <leader>tb :action ToggleLineBreakpoint<CR>
+nnoremap <Leader>vb :action ViewBreakpoints<CR>
+""""""""""""""""""""""""""""""""""""""Start and stop""""""""""""""""""""""""""""""""
+
+" nnoremap <Leader>d :action Debug<CR>
+" nnoremap <Leader>r :action Run<CR>
+" nnoremap <Leader>rc :action Stop<CR>
+" nnoremap <Leader>rr :action Rerun<CR>
+" nnoremap <Leader>rm :action RunClass<CR>
+" nnoremap <Leader>cd :action ChooseDebugConfiguration<CR>
+" nnoremap <Leader>cr :action ChooseRunConfiguration<CR>
