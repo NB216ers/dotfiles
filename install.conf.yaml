@@ -6,6 +6,7 @@
 
 - create:
   - ~/.proxychains
+  - ~/.config/alacritty
 
 - link:
   # shell stuff
@@ -22,5 +23,9 @@
     ~/.tmux.conf.local: tmux/.tmux.conf.local
   # proxychains
     ~/.proxychains/proxychains.conf: proxychains/proxychains.conf
+  # alacritty
+    ~/.config/alacritty/alacritty.toml: alacritty/alacritty.toml
+  # starship
+    ~/.config/starship.toml: starship/starship.toml
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
