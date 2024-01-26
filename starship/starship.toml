@@ -1,6 +1,6 @@
 format = """\
 [](fg:#7DF9AA)\
-[R[🐼](bg:#7DF9AA)G ☄️ $localip](bg:#7DF9AA fg:#090c0c)\
+[R🐼G ☄️ $localip](bg:#7DF9AA fg:#090c0c)\
 [](fg:#7DF9AA bg:#1C3A5E)\
 $time\
 [](fg:#1C3A5E bg:#3B76F0)\
@@ -10,7 +10,7 @@ $git_branch\
 $git_status\
 $git_metrics\
 [](fg:#FCF392 bg:#005f87)\
-$java \
+$java\
 [](fg:#005f87)\
 $character\
 """
@@ -61,5 +61,5 @@ disabled = false
 [java]
 symbol = '☕ '
 format = '[${symbol}(${version})]($style)'
-style = "fg:#030B16 bg:#005f87"
+style = "bg:#005f87"
 
