@@ -23,3 +23,5 @@
 	helper = cache
 [credential "http://10.5.1.28:8070"]
 	provider = generic
+[credential "http://172.30.247.110"]
+	provider = generic
